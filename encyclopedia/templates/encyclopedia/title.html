@@ -5,11 +5,18 @@
 {% endblock %}
 
 {% block body %}
-    <h1> {{ title }} </h1>
 
-    <div>
-        <p>{{ entry }}</p>
-    </div>
+    {% if not entry %}
+        <div>
+            <p>Apologies. Page with {{ title }} doesn't exist yet.</p>
+        </div>
+    {% else %}
+        <h1> {{ title }} </h1>
+
+        <div>
+            <p>{{ entry }}</p>
+        </div>
+    {% endif %}
 
 {% endblock %}
 
