@@ -22,12 +22,20 @@
                     <a href="{% url 'new_page' %}">Create New Page</a>
                 </div>
                 <div>
-                    Random Page
+                    <a href="{% url 'random_page' %}">Random Page</a>
                 </div>
                 {% block nav %}
                 {% endblock %}
             </div>
             <div class="main col-lg-10 col-md-9">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-primary" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
                 {% block body %}
                 {% endblock %}
             </div>

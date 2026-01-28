@@ -11,11 +11,17 @@
             <p>Apologies. Page with {{ title }} doesn't exist yet.</p>
         </div>
     {% else %}
-        <h1> {{ title }} </h1>
+        <p>{{ message }}</p>
+        <h1>{{ title }}</h1>
 
         <div>
             <p>{{ entry }}</p>
         </div>
+
+        <a href="{% url 'edit_page' title %}">
+            <button>Edit Page</button>
+        </a>
+
     {% endif %}
 
 {% endblock %}

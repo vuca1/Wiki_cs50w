@@ -1,5 +1,7 @@
 import re
+import random
 
+from django.contrib import messages
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -73,3 +75,28 @@ def new_page(request):
             })
         
     return render(request, "encyclopedia/new_page.html")
+
+def edit_page(request, title):
+    """
+    
+    """
+    if request.method == "POST":
+        new_content = request.POST["content"]
+        util.save_entry(title, new_content)
+        messages.success(request, f"Page '{title}' was updated successfully.")
+        return HttpResponseRedirect(reverse("title", args=(title,)))
+
+    old_content = util.get_entry(title=title)
+    return render(request, "encyclopedia/edit_page.html", {
+        "title": title,
+        "content": old_content,
+    })
+
+def random_page(request):
+    """
+    Render random page from all entries.
+    """
+    entries = util.list_entries()
+    entry = entries[random.randint(0, (len(entries) - 1))]
+
+    return HttpResponseRedirect(reverse("title", args=(entry,)))
