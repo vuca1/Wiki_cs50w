@@ -1,0 +1,18 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wiki: New Page
+{% endblock %}
+
+{% block body %}
+    <h1>Add a new entry:</h1>
+
+    <form action="{% url 'new_page' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="title..." autofocus>
+        <input type="submit">
+        <br>
+        <textarea style="resize: none; margin: 5px;" name="content" placeholder="content..." rows="4" cols="4"></textarea>
+    </form>
+
+{% endblock %}
