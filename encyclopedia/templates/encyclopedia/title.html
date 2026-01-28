@@ -12,10 +12,9 @@
         </div>
     {% else %}
         <p>{{ message }}</p>
-        <h1>{{ title }}</h1>
-
+        
         <div>
-            <p>{{ entry }}</p>
+            <p>{{ entry|safe }}</p>
         </div>
 
         <a href="{% url 'edit_page' title %}">

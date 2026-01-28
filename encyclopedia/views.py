@@ -6,6 +6,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from markdown2 import Markdown
+
 from . import util
 
 
@@ -24,9 +26,10 @@ def title(request, title):
     
     :param title: title of a page
     """
+    markdowner = Markdown()
     return render(request, "encyclopedia/title.html", {
         "title": title,
-        "entry": util.get_entry(title)
+        "entry": markdowner.convert(util.get_entry(title))
     })
 
 def search(request):
@@ -78,7 +81,9 @@ def new_page(request):
 
 def edit_page(request, title):
     """
+    Redirects user to page where user can change content of an entry.
     
+    :param title: Title of a page
     """
     if request.method == "POST":
         new_content = request.POST["content"]
